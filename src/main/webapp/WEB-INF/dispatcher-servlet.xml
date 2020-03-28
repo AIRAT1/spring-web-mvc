@@ -13,7 +13,7 @@
         <property name="url" value="jdbc:postgresql://localhost:5432/fix_user_db"/>
     </bean>
 
-    <bean id="/users" class="de.controllers.UsersController"/>
+    <bean id="simple/users" class="de.controllers.UsersControllerSimple"/>
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/jsp/"/>

@@ -1,30 +1,24 @@
 package de.controllers;
 
-
 import de.dao.UsersDao;
 import de.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class UsersController implements Controller {
+public class UsersController {
     @Autowired
     private UsersDao usersDao;
 
-    @Override
-    public ModelAndView handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
-        if (httpServletRequest.getMethod().equals("GET")) {
+    @RequestMapping(path = "/users", method = RequestMethod.GET) {
+        public ModelAndView getAllUsers() {
             List<User> users = usersDao.findAll();
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("users");
-            modelAndView.addObject("usersFromServer", users);
+            ModelAndView modelAndView = new ModelAndView("users");
+            modelAndView.addObject("userSFromServer", users);
             return modelAndView;
         }
-
-        return null;
     }
 }
