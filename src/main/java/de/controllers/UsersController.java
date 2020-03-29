@@ -1,6 +1,7 @@
 package de.controllers;
 
 import de.dao.UsersDao;
+import de.forms.UserForm;
 import de.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,5 +40,12 @@ public class UsersController {
         userCandidate.ifPresent(user -> modelAndView.addObject("usersFromServer",
                 Collections.singletonList(user)));
         return modelAndView;
+    }
+
+    @RequestMapping(path = "/users", method = RequestMethod.POST)
+    public String addUser(UserForm userForm) {
+        User newUser = User.from(userForm);
+        usersDao.save(newUser);
+        return "redirect:/users";
     }
 }

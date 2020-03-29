@@ -1,5 +1,6 @@
 package de.models;
 
+import de.forms.UserForm;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,4 +17,11 @@ public class User {
     private String firstName;
     private String lastName;
     private List<Car> cars;
+
+    public static User from(UserForm form) {
+        return User.builder()
+                .firstName(form.getFirstName())
+                .lastName(form.getLastName())
+                .build();
+    }
 }
